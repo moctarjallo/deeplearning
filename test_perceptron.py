@@ -36,6 +36,35 @@ class TestForward(unittest.TestCase):
         y = 1*(-1) + 2*(-2)
         self.assertEqual(p(X), y)
         
+class TestUpdate(unittest.TestCase):
+    # This is equivalent to `test_perceptron_update1()` from the problem statement
+    def test_1(self):
+        x = np.array([0,1])
+        y = -1
+        w = np.array([1,1])
+        p = Perceptron(weights=w)
+        p.update(x,y)
+        #breakpoint()
+        self.assertTrue((p.weights.reshape(-1,) == np.array([1,0])).all())
+        
+    def test_2(self):
+        # This is equivalent to `test_perceptron_update2()` from the problem statement
+        x = np.random.rand(25)
+        y = 1
+        w = np.zeros(25)
+        p = Perceptron(weights=w)
+        p.update(x,y)
+        self.assertTrue(np.linalg.norm(p.weights-x)<1e-8)
+        
+    def test_3(self):
+        # This is equivalent to `test_perceptron_update3()` from the problem statement
+        x = np.random.rand(25)
+        y = -1
+        w = np.zeros(25)
+        p = Perceptron(weights=w)
+        p.update(x,y)
+        self.assertTrue(np.linalg.norm(p.weights+x)<1e-8)
+        
         
 if __name__ == '__main__':
     unittest.main()

@@ -22,7 +22,7 @@ class Perceptron:
     # by a numpy array. If weights are not given by user, then he must
     # provide a shape to initialize random weights of that shape.
     def __init__(self, weights=np.array([]), shape=()):
-        if weights.any():
+        if weights.size != 0:
             self.weights = weights
         elif not shape:
             raise TypeError("Must provide a shape for the Perceptron")
@@ -32,6 +32,28 @@ class Perceptron:
     def forward(self, x):
         y = x.dot(self.weights)
         return y
+    
+    def update(self, x,y):
+        # is the equivalent of `perception_update(x,y,w)` from the problem statement
+        """
+        function w=perceptron_update(x,y,w);
+    
+        Implementation of Perceptron weights updating
+        Input:
+        x : input vector of d dimensions (d)
+        y : corresponding label (-1 or +1)
+        w : weight vector of d dimensions
+    
+        Output:
+        w : weight vector after updating (d)
+        """
+    
+        # your code here
+    
+    
+        # return w
+        # instead update directlty self.weights
+        return
     
     # just to recall that this is no other than a model of a function
     def __call__(self, x):
