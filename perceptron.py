@@ -21,17 +21,23 @@ class Perceptron:
     # A Perceptron is defined as simple as a set of weights represented
     # by a numpy array. If weights are not given by user, then he must
     # provide a shape to initialize random weights of that shape.
-    def __init__(self, weights=np.array([]), shape=()):
+    def __init__(self, weights=np.array([]), shape=(), bias=0):
         if weights.size != 0:
             self.weights = weights
         elif not shape:
             raise TypeError("Must provide a shape for the Perceptron")
         else:
             self.weights = np.random.rand(*shape)
+        self.bias = bias
+        
+    def activation(self, x):
+        # using sigmoid by default
+        return 1 / (1 + np.exp(-x))
+        
         
     def forward(self, x):
-        y = x.dot(self.weights)
-        return y
+        y = x.dot(self.weights) + self.bias
+        return self.activation(y)
     
     def update(self, x,y):
         # is the equivalent of `perception_update(x,y,w)` from the problem statement

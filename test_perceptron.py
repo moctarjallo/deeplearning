@@ -23,18 +23,20 @@ class TestForward(unittest.TestCase):
     def test_(self):
         X = np.array([1, 2])
         W = np.array([-1, -2])
-        p = Perceptron(weights=W)
+        b = .5
+        p = Perceptron(weights=W, bias=.5)
         
-        y = 1*(-1) + 2*(-2)
-        self.assertEqual(p.forward(X), y)
+        y = 1*(-1) + 2*(-2) + b
+        self.assertEqual(p.forward(X), p.activation(y))
         
     def test_call(self):
         X = np.array([1, 2])
         W = np.array([-1, -2])
-        p = Perceptron(weights=W)
+        b = 1
+        p = Perceptron(weights=W, bias=b)
         
-        y = 1*(-1) + 2*(-2)
-        self.assertEqual(p(X), y)
+        y = 1*(-1) + 2*(-2) + b
+        self.assertEqual(p(X), p.activation(y))
         
 class TestUpdate(unittest.TestCase):
     # This is equivalent to `test_perceptron_update1()` from the problem statement
